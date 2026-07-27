@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int main() {
+    unsigned long long n;
+    int k;
+    scanf("%d %d", &n, &k);
+    unsigned long long mask = (unsigned long long)1 << k;
+    n = n ^ mask;
+    printf("%d\n", n);
+    return 0;
+}
