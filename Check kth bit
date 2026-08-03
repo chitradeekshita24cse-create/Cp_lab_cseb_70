@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n, k;
+    
+    if (scanf("%d %d", &n, &k) == 2) {
+        int result = (n >> k) & 1;
+        printf("%d\n", result);
+    
+}
+    return 0;
+}
