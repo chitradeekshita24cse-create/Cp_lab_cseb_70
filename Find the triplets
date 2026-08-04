@@ -1,27 +1,59 @@
-import sys
-nums = list(map(int, sys.stdin.read().split()))
-if nums:
-    n, arr, X = nums[0], sorted(nums[1:-1]), nums[-1]
-    found = False
 
-    for i in range(n - 2):
-        if i > 0 and arr[i] == arr[i - 1]: 
-            continue  
+import java.util.*;
 
-        left, right = i + 1, n - 1
-        while left < right:
-            current_sum = arr[i] + arr[left] + arr[right]
-
-            if current_sum == X:
-                print(f"{arr[i]} {arr[left]} {arr[right]}")
-                found = True
-                left, right = left + 1, right - 1
-                while left < right and arr[left] == arr[left - 1]: left += 1
-                while left < right and arr[right] == arr[right + 1]: right -= 1
-            elif current_sum < X:
-                left += 1   # Make sum larger
-            else:
-                right -= 1  # Make sum smaller
-
-    if not found:
-        print("No Triplet Found")
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long[] arr = new long[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextLong();
+        }
+        long x = sc.nextLong();
+        
+        // Sorting the array to handle duplicates and use two pointers
+        Arrays.sort(arr);
+        boolean found = false;
+        
+        for (int i = 0; i < n - 2; i++) {
+            // Skip duplicate elements for the first position
+            if (i > 0 && arr[i] == arr[i - 1]) {
+                continue;
+            }
+            
+            int j = i + 1;
+            int k = n - 1;
+            
+            while (j < k) {
+                long currentSum = arr[i] + arr[j] + arr[k];
+                
+                if (currentSum == x) {
+                    System.out.println(arr[i] + " " + arr[j] + " " + arr[k]);
+                    found = true;
+                    
+                    // Skip duplicate elements for the second position
+                    while (j < k && arr[j] == arr[j + 1]) {
+                        j++;
+                    }
+                    // Skip duplicate elements for the third position
+                    while (j < k && arr[k] == arr[k - 1]) {
+                        k--;
+                    }
+                    
+                    j++;
+                    k--;
+                } else if (currentSum < x) {
+                    j++; // Need a larger sum
+                } else {
+                    k--; // Need a smaller sum
+                }
+            }
+        }
+        
+        if (!found) {
+            System.out.println("No Triplet Found");
+        }
+        
+        sc.close();
+    }
+}
