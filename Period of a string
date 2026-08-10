@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+#define MAX_LEN 100005
+
+char s[MAX_LEN];
+int lps[MAX_LEN];
+
+int main() {
+    if (scanf("%100004s", s) != 1) {
+        return 0;
+    }
+
+    int n = strlen(s);
+    int length = 0;
+    int i = 1;
+
+    while (i < n) {
+        if (s[i] == s[length]) {
+            length++;
+            lps[i] = length;
+            i++;
+        } else {
+            if (length != 0) {
+                length = lps[length - 1];
+            } else {
+                lps[i] = 0;
+                i++;
+            }
+        }
+    }
+
+    int longest_border = lps[n - 1];
+    int p = n - longest_border;
+    if (n % p == 0) {
+        printf("%d\n", p);
+    } else {
+        printf("%d\n", n);
+    }
+
+    return 0;
+}
