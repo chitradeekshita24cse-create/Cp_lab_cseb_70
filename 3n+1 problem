@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int orig_i, orig_j;
+
+    while (scanf("%d %d", &orig_i, &orig_j) != EOF) {
+        
+        int start = (orig_i < orig_j) ? orig_i : orig_j;
+        int end = (orig_i > orig_j) ? orig_i : orig_j;
+        
+        int max_cycle = 0;
+
+        for (int num = start; num <= end; ++num) {
+            long long n = num; 
+            int current_length = 1;
+
+            while (n > 1) {
+                if (n % 2 == 0) {
+                    n = n / 2;
+                } else {
+                    n = 3 * n + 1;
+                }
+                current_length++;
+            }
+
+            if (current_length > max_cycle) {
+                max_cycle = current_length;
+            }
+        }
+
+        printf("%d %d %d\n", orig_i, orig_j, max_cycle);
+    }
+
+    return 0;
+}
