@@ -1,0 +1,22 @@
+def solve_camel_case():
+    n = int(input().strip())
+    words = input().strip().split(",")
+    pattern = input().strip()
+
+    matched_elements = []
+    for word in words:
+        abbr = "".join([char for char in word if char.isupper()])
+        if abbr.startswith(pattern):
+    
+            matched_elements.append((abbr, word))
+
+    if not matched_elements:
+        print("No match found")
+        return
+
+    matched_elements.sort()
+    for abbr, word in matched_elements:
+        print(word)
+
+if __name__ == "__main__":
+    solve_camel_case()
