@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int gcd(int A, int B) {
+    if (A == 0) return B;
+    if (B == 0) return A;
+    if ((A & 1) == 0 && (B & 1) == 0) 
+        return 2 * gcd(A / 2, B / 2);
+    if ((A & 1) == 0) 
+        return gcd(A / 2, B);
+    if ((B & 1) == 0) 
+        return gcd(A, B / 2);
+    if (A > B) 
+        return gcd((A - B) / 2, B);
+    return gcd(A, (B - A) / 2); 
+}
+
+int main() {
+    int A, B;
+    scanf("%d %d", &A, &B);
+    printf("%d\n", gcd(A, B));
+    return 0;
+}
