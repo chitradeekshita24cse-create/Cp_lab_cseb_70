@@ -1,0 +1,35 @@
+import math
+import sys
+
+def solve():
+    input_data = sys.stdin.read().split()
+    
+    if not input_data:
+        return
+    nums = [int(x) for x in input_data]
+    if len(nums) == 3:
+        A, B, T = nums[0], nums[1], nums[2]
+        check_and_print(A, B, T)
+        return
+
+    Q = nums[0]
+    idx = 1
+    for _ in range(Q):
+        if idx + 2 >= len(nums):
+            break
+        A = nums[idx]
+        B = nums[idx+1]
+        T = nums[idx+2]
+        idx += 3
+        check_and_print(A, B, T)
+
+def check_and_print(A, B, T):
+    if T > max(A, B):
+        print("NO")
+    elif T % math.gcd(A, B) == 0:
+        print("YES")
+    else:
+        print("NO")
+
+if __name__ == '__main__':
+    solve()
