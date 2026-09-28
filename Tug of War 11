@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int n, a[30], total;
+int min = 999999;
+
+void solve(int i, int count, int sum) {
+    
+    if (i == n) {
+        int count2 = n - count;
+
+        if (abs(count - count2) <= 1) {
+            int sum2 = total - sum;
+            int diff = abs(sum - sum2);
+
+            if (diff < min)
+                min = diff;
+        }
+
+        return;
+    }
+
+    solve(i + 1, count + 1, sum + a[i]);
+
+    solve(i + 1, count, sum);
+}
+
+int main() {
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+        total += a[i];
+    }
+
+    solve(0, 0, 0);
+
+    printf("%d", min);
+
+    return 0;
+}
